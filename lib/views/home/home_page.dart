@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:omohide_map_flutter/components/auth_display/user_info_card.dart';
+import 'package:omohide_map_flutter/components/logout_buttons/logout_icon_button.dart';
 import 'package:omohide_map_flutter/view_models/home_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -13,7 +15,9 @@ class HomePage extends StatelessWidget {
         appBar: AppBar(
           title: const Text('おもひでまっぷ'),
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-          actions: [],
+          actions: [
+            const LogoutIconButton(),
+          ],
         ),
         body: Center(
           child: _HomePageBody(),
@@ -29,6 +33,14 @@ class _HomePageBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<HomeViewModel>();
-    return Text(viewModel.data ?? '');
+
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const UserInfoCard(showLogoutButton: false),
+        const SizedBox(height: 20),
+        if (viewModel.data != null) Text(viewModel.data!),
+      ],
+    );
   }
 }

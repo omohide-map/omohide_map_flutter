@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:omohide_map_flutter/constants/config.dart';
+import 'package:omohide_map_flutter/env/env.dart';
 import 'package:omohide_map_flutter/providers/auth_provider.dart';
 import 'package:omohide_map_flutter/providers/theme_provider.dart';
 import 'package:provider/provider.dart';
@@ -13,8 +13,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Supabase.initialize(
-    url: supabaseUrl,
-    anonKey: supabaseAnonKey,
+    url: Env.supabaseUrl,
+    anonKey: Env.supabaseAnonKey,
   );
 
   runApp(const MyApp());
@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
       child: Consumer2<ThemeProvider, AuthProvider>(
         builder: (context, themeProvider, authProvider, child) {
           final GoRouter router = createRouter(authProvider);
-          
+
           return MaterialApp.router(
             title: 'おもひでまっぷ',
             theme: AppTheme.lightTheme,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:omohide_map_flutter/constants/config.dart';
+import 'package:omohide_map_flutter/env/env.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AuthProvider extends ChangeNotifier {
@@ -30,7 +30,7 @@ class AuthProvider extends ChangeNotifier {
       notifyListeners();
 
       final GoogleSignIn googleSignIn = GoogleSignIn(
-        clientId: googleIosClientId,
+        clientId: Env.googleIosClientId,
       );
       final googleUser = await googleSignIn.signIn();
       final googleAuth = await googleUser!.authentication;

@@ -28,7 +28,6 @@ class CreatePostRequest with _$CreatePostRequest {
     required double latitude,
     required double longitude,
     @Default([]) List<String> images,
-    required DateTime createdAt,
   }) = _CreatePostRequest;
 
   factory CreatePostRequest.fromJson(Map<String, dynamic> json) => _$CreatePostRequestFromJson(json);

@@ -155,7 +155,6 @@ class PostViewModel extends ChangeNotifier {
         latitude: _currentPosition!.latitude,
         longitude: _currentPosition!.longitude,
         images: _selectedImages.map((img) => img.base64Data).toList(),
-        createdAt: DateTime.now(),
       );
 
       final result = await _postRepository.createPost(request);

@@ -389,7 +389,6 @@ mixin _$CreatePostRequest {
   double get latitude => throw _privateConstructorUsedError;
   double get longitude => throw _privateConstructorUsedError;
   List<String> get images => throw _privateConstructorUsedError;
-  DateTime get createdAt => throw _privateConstructorUsedError;
 
   /// Serializes this CreatePostRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -408,11 +407,7 @@ abstract class $CreatePostRequestCopyWith<$Res> {
       _$CreatePostRequestCopyWithImpl<$Res, CreatePostRequest>;
   @useResult
   $Res call(
-      {String text,
-      double latitude,
-      double longitude,
-      List<String> images,
-      DateTime createdAt});
+      {String text, double latitude, double longitude, List<String> images});
 }
 
 /// @nodoc
@@ -434,7 +429,6 @@ class _$CreatePostRequestCopyWithImpl<$Res, $Val extends CreatePostRequest>
     Object? latitude = null,
     Object? longitude = null,
     Object? images = null,
-    Object? createdAt = null,
   }) {
     return _then(_value.copyWith(
       text: null == text
@@ -453,10 +447,6 @@ class _$CreatePostRequestCopyWithImpl<$Res, $Val extends CreatePostRequest>
           ? _value.images
           : images // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
     ) as $Val);
   }
 }
@@ -470,11 +460,7 @@ abstract class _$$CreatePostRequestImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String text,
-      double latitude,
-      double longitude,
-      List<String> images,
-      DateTime createdAt});
+      {String text, double latitude, double longitude, List<String> images});
 }
 
 /// @nodoc
@@ -494,7 +480,6 @@ class __$$CreatePostRequestImplCopyWithImpl<$Res>
     Object? latitude = null,
     Object? longitude = null,
     Object? images = null,
-    Object? createdAt = null,
   }) {
     return _then(_$CreatePostRequestImpl(
       text: null == text
@@ -513,10 +498,6 @@ class __$$CreatePostRequestImplCopyWithImpl<$Res>
           ? _value._images
           : images // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
     ));
   }
 }
@@ -528,8 +509,7 @@ class _$CreatePostRequestImpl implements _CreatePostRequest {
       {required this.text,
       required this.latitude,
       required this.longitude,
-      final List<String> images = const [],
-      required this.createdAt})
+      final List<String> images = const []})
       : _images = images;
 
   factory _$CreatePostRequestImpl.fromJson(Map<String, dynamic> json) =>
@@ -551,11 +531,8 @@ class _$CreatePostRequestImpl implements _CreatePostRequest {
   }
 
   @override
-  final DateTime createdAt;
-
-  @override
   String toString() {
-    return 'CreatePostRequest(text: $text, latitude: $latitude, longitude: $longitude, images: $images, createdAt: $createdAt)';
+    return 'CreatePostRequest(text: $text, latitude: $latitude, longitude: $longitude, images: $images)';
   }
 
   @override
@@ -568,15 +545,13 @@ class _$CreatePostRequestImpl implements _CreatePostRequest {
                 other.latitude == latitude) &&
             (identical(other.longitude, longitude) ||
                 other.longitude == longitude) &&
-            const DeepCollectionEquality().equals(other._images, _images) &&
-            (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt));
+            const DeepCollectionEquality().equals(other._images, _images));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, text, latitude, longitude,
-      const DeepCollectionEquality().hash(_images), createdAt);
+      const DeepCollectionEquality().hash(_images));
 
   /// Create a copy of CreatePostRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -600,8 +575,7 @@ abstract class _CreatePostRequest implements CreatePostRequest {
       {required final String text,
       required final double latitude,
       required final double longitude,
-      final List<String> images,
-      required final DateTime createdAt}) = _$CreatePostRequestImpl;
+      final List<String> images}) = _$CreatePostRequestImpl;
 
   factory _CreatePostRequest.fromJson(Map<String, dynamic> json) =
       _$CreatePostRequestImpl.fromJson;
@@ -614,8 +588,6 @@ abstract class _CreatePostRequest implements CreatePostRequest {
   double get longitude;
   @override
   List<String> get images;
-  @override
-  DateTime get createdAt;
 
   /// Create a copy of CreatePostRequest
   /// with the given fields replaced by the non-null parameter values.

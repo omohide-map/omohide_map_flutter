@@ -50,7 +50,6 @@ _$CreatePostRequestImpl _$$CreatePostRequestImplFromJson(
               ?.map((e) => e as String)
               .toList() ??
           const [],
-      createdAt: DateTime.parse(json['createdAt'] as String),
     );
 
 Map<String, dynamic> _$$CreatePostRequestImplToJson(
@@ -60,5 +59,4 @@ Map<String, dynamic> _$$CreatePostRequestImplToJson(
       'latitude': instance.latitude,
       'longitude': instance.longitude,
       'images': instance.images,
-      'createdAt': instance.createdAt.toIso8601String(),
     };

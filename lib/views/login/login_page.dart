@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:omohide_map_flutter/constants/routes.dart';
 import 'package:omohide_map_flutter/providers/auth_provider.dart';
 import 'package:omohide_map_flutter/view_models/login_view_model.dart';
 import 'package:provider/provider.dart';
@@ -41,14 +39,14 @@ class _LoginPageContent extends StatelessWidget {
                 ),
                 const SizedBox(height: 24),
                 Text(
-                  '???????',
+                  'おもひでまっぷ',
                   style: theme.textTheme.headlineMedium?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  '????',
+                  'おもひでまっぷ',
                   style: theme.textTheme.bodyLarge?.copyWith(
                     color: theme.colorScheme.onSurfaceVariant,
                   ),
@@ -88,11 +86,7 @@ class _LoginPageContent extends StatelessWidget {
                     onPressed: authProvider.isLoading
                         ? null
                         : () async {
-                            final success =
-                                await loginViewModel.signInWithGoogle(context);
-                            if (success && context.mounted) {
-                              context.go(Routes.home);
-                            }
+                            await loginViewModel.signInWithGoogle(context);
                           },
                     icon: authProvider.isLoading
                         ? const SizedBox(
@@ -104,7 +98,7 @@ class _LoginPageContent extends StatelessWidget {
                           )
                         : const Icon(Icons.login),
                     label: Text(
-                      authProvider.isLoading ? '?????...' : 'Google?????',
+                      authProvider.isLoading ? 'ログイン中...' : 'Googleでログイン',
                       style: const TextStyle(fontSize: 16),
                     ),
                     style: ElevatedButton.styleFrom(

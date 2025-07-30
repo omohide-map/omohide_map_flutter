@@ -9,35 +9,28 @@ part of 'post_model.dart';
 _$PostModelImpl _$$PostModelImplFromJson(Map<String, dynamic> json) =>
     _$PostModelImpl(
       id: json['id'] as String?,
+      userId: json['user_id'] as String?,
       text: json['text'] as String,
       latitude: (json['latitude'] as num).toDouble(),
       longitude: (json['longitude'] as num).toDouble(),
-      images: (json['images'] as List<dynamic>?)
+      imageUrls: (json['image_urls'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
           const [],
-      imageUrls: (json['imageUrls'] as List<dynamic>?)
-              ?.map((e) => e as String)
-              .toList() ??
-          const [],
-      createdAt: DateTime.parse(json['createdAt'] as String),
-      userId: json['userId'] as String?,
-      userName: json['userName'] as String?,
-      userAvatar: json['userAvatar'] as String?,
+      createdAt: DateTime.parse(json['created_at'] as String),
+      updatedAt: DateTime.parse(json['updated_at'] as String),
     );
 
 Map<String, dynamic> _$$PostModelImplToJson(_$PostModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
+      'user_id': instance.userId,
       'text': instance.text,
       'latitude': instance.latitude,
       'longitude': instance.longitude,
-      'images': instance.images,
-      'imageUrls': instance.imageUrls,
-      'createdAt': instance.createdAt.toIso8601String(),
-      'userId': instance.userId,
-      'userName': instance.userName,
-      'userAvatar': instance.userAvatar,
+      'image_urls': instance.imageUrls,
+      'created_at': instance.createdAt.toIso8601String(),
+      'updated_at': instance.updatedAt.toIso8601String(),
     };
 
 _$CreatePostRequestImpl _$$CreatePostRequestImplFromJson(

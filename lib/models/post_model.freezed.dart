@@ -21,15 +21,17 @@ PostModel _$PostModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$PostModel {
   String? get id => throw _privateConstructorUsedError;
+  @JsonKey(name: 'user_id')
+  String? get userId => throw _privateConstructorUsedError;
   String get text => throw _privateConstructorUsedError;
   double get latitude => throw _privateConstructorUsedError;
   double get longitude => throw _privateConstructorUsedError;
-  List<String> get images => throw _privateConstructorUsedError;
+  @JsonKey(name: 'image_urls')
   List<String> get imageUrls => throw _privateConstructorUsedError;
+  @JsonKey(name: 'created_at')
   DateTime get createdAt => throw _privateConstructorUsedError;
-  String? get userId => throw _privateConstructorUsedError;
-  String? get userName => throw _privateConstructorUsedError;
-  String? get userAvatar => throw _privateConstructorUsedError;
+  @JsonKey(name: 'updated_at')
+  DateTime get updatedAt => throw _privateConstructorUsedError;
 
   /// Serializes this PostModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -48,15 +50,13 @@ abstract class $PostModelCopyWith<$Res> {
   @useResult
   $Res call(
       {String? id,
+      @JsonKey(name: 'user_id') String? userId,
       String text,
       double latitude,
       double longitude,
-      List<String> images,
-      List<String> imageUrls,
-      DateTime createdAt,
-      String? userId,
-      String? userName,
-      String? userAvatar});
+      @JsonKey(name: 'image_urls') List<String> imageUrls,
+      @JsonKey(name: 'created_at') DateTime createdAt,
+      @JsonKey(name: 'updated_at') DateTime updatedAt});
 }
 
 /// @nodoc
@@ -75,20 +75,22 @@ class _$PostModelCopyWithImpl<$Res, $Val extends PostModel>
   @override
   $Res call({
     Object? id = freezed,
+    Object? userId = freezed,
     Object? text = null,
     Object? latitude = null,
     Object? longitude = null,
-    Object? images = null,
     Object? imageUrls = null,
     Object? createdAt = null,
-    Object? userId = freezed,
-    Object? userName = freezed,
-    Object? userAvatar = freezed,
+    Object? updatedAt = null,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      userId: freezed == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
               as String?,
       text: null == text
           ? _value.text
@@ -102,10 +104,6 @@ class _$PostModelCopyWithImpl<$Res, $Val extends PostModel>
           ? _value.longitude
           : longitude // ignore: cast_nullable_to_non_nullable
               as double,
-      images: null == images
-          ? _value.images
-          : images // ignore: cast_nullable_to_non_nullable
-              as List<String>,
       imageUrls: null == imageUrls
           ? _value.imageUrls
           : imageUrls // ignore: cast_nullable_to_non_nullable
@@ -114,18 +112,10 @@ class _$PostModelCopyWithImpl<$Res, $Val extends PostModel>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      userId: freezed == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      userName: freezed == userName
-          ? _value.userName
-          : userName // ignore: cast_nullable_to_non_nullable
-              as String?,
-      userAvatar: freezed == userAvatar
-          ? _value.userAvatar
-          : userAvatar // ignore: cast_nullable_to_non_nullable
-              as String?,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ) as $Val);
   }
 }
@@ -140,15 +130,13 @@ abstract class _$$PostModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {String? id,
+      @JsonKey(name: 'user_id') String? userId,
       String text,
       double latitude,
       double longitude,
-      List<String> images,
-      List<String> imageUrls,
-      DateTime createdAt,
-      String? userId,
-      String? userName,
-      String? userAvatar});
+      @JsonKey(name: 'image_urls') List<String> imageUrls,
+      @JsonKey(name: 'created_at') DateTime createdAt,
+      @JsonKey(name: 'updated_at') DateTime updatedAt});
 }
 
 /// @nodoc
@@ -165,20 +153,22 @@ class __$$PostModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
+    Object? userId = freezed,
     Object? text = null,
     Object? latitude = null,
     Object? longitude = null,
-    Object? images = null,
     Object? imageUrls = null,
     Object? createdAt = null,
-    Object? userId = freezed,
-    Object? userName = freezed,
-    Object? userAvatar = freezed,
+    Object? updatedAt = null,
   }) {
     return _then(_$PostModelImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      userId: freezed == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
               as String?,
       text: null == text
           ? _value.text
@@ -192,10 +182,6 @@ class __$$PostModelImplCopyWithImpl<$Res>
           ? _value.longitude
           : longitude // ignore: cast_nullable_to_non_nullable
               as double,
-      images: null == images
-          ? _value._images
-          : images // ignore: cast_nullable_to_non_nullable
-              as List<String>,
       imageUrls: null == imageUrls
           ? _value._imageUrls
           : imageUrls // ignore: cast_nullable_to_non_nullable
@@ -204,18 +190,10 @@ class __$$PostModelImplCopyWithImpl<$Res>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      userId: freezed == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      userName: freezed == userName
-          ? _value.userName
-          : userName // ignore: cast_nullable_to_non_nullable
-              as String?,
-      userAvatar: freezed == userAvatar
-          ? _value.userAvatar
-          : userAvatar // ignore: cast_nullable_to_non_nullable
-              as String?,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 }
@@ -225,17 +203,14 @@ class __$$PostModelImplCopyWithImpl<$Res>
 class _$PostModelImpl implements _PostModel {
   const _$PostModelImpl(
       {this.id,
+      @JsonKey(name: 'user_id') this.userId,
       required this.text,
       required this.latitude,
       required this.longitude,
-      final List<String> images = const [],
-      final List<String> imageUrls = const [],
-      required this.createdAt,
-      this.userId,
-      this.userName,
-      this.userAvatar})
-      : _images = images,
-        _imageUrls = imageUrls;
+      @JsonKey(name: 'image_urls') final List<String> imageUrls = const [],
+      @JsonKey(name: 'created_at') required this.createdAt,
+      @JsonKey(name: 'updated_at') required this.updatedAt})
+      : _imageUrls = imageUrls;
 
   factory _$PostModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$PostModelImplFromJson(json);
@@ -243,23 +218,17 @@ class _$PostModelImpl implements _PostModel {
   @override
   final String? id;
   @override
+  @JsonKey(name: 'user_id')
+  final String? userId;
+  @override
   final String text;
   @override
   final double latitude;
   @override
   final double longitude;
-  final List<String> _images;
-  @override
-  @JsonKey()
-  List<String> get images {
-    if (_images is EqualUnmodifiableListView) return _images;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_images);
-  }
-
   final List<String> _imageUrls;
   @override
-  @JsonKey()
+  @JsonKey(name: 'image_urls')
   List<String> get imageUrls {
     if (_imageUrls is EqualUnmodifiableListView) return _imageUrls;
     // ignore: implicit_dynamic_type
@@ -267,17 +236,15 @@ class _$PostModelImpl implements _PostModel {
   }
 
   @override
+  @JsonKey(name: 'created_at')
   final DateTime createdAt;
   @override
-  final String? userId;
-  @override
-  final String? userName;
-  @override
-  final String? userAvatar;
+  @JsonKey(name: 'updated_at')
+  final DateTime updatedAt;
 
   @override
   String toString() {
-    return 'PostModel(id: $id, text: $text, latitude: $latitude, longitude: $longitude, images: $images, imageUrls: $imageUrls, createdAt: $createdAt, userId: $userId, userName: $userName, userAvatar: $userAvatar)';
+    return 'PostModel(id: $id, userId: $userId, text: $text, latitude: $latitude, longitude: $longitude, imageUrls: $imageUrls, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -286,21 +253,18 @@ class _$PostModelImpl implements _PostModel {
         (other.runtimeType == runtimeType &&
             other is _$PostModelImpl &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.text, text) || other.text == text) &&
             (identical(other.latitude, latitude) ||
                 other.latitude == latitude) &&
             (identical(other.longitude, longitude) ||
                 other.longitude == longitude) &&
-            const DeepCollectionEquality().equals(other._images, _images) &&
             const DeepCollectionEquality()
                 .equals(other._imageUrls, _imageUrls) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
-            (identical(other.userId, userId) || other.userId == userId) &&
-            (identical(other.userName, userName) ||
-                other.userName == userName) &&
-            (identical(other.userAvatar, userAvatar) ||
-                other.userAvatar == userAvatar));
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -308,15 +272,13 @@ class _$PostModelImpl implements _PostModel {
   int get hashCode => Object.hash(
       runtimeType,
       id,
+      userId,
       text,
       latitude,
       longitude,
-      const DeepCollectionEquality().hash(_images),
       const DeepCollectionEquality().hash(_imageUrls),
       createdAt,
-      userId,
-      userName,
-      userAvatar);
+      updatedAt);
 
   /// Create a copy of PostModel
   /// with the given fields replaced by the non-null parameter values.
@@ -336,16 +298,15 @@ class _$PostModelImpl implements _PostModel {
 
 abstract class _PostModel implements PostModel {
   const factory _PostModel(
-      {final String? id,
-      required final String text,
-      required final double latitude,
-      required final double longitude,
-      final List<String> images,
-      final List<String> imageUrls,
-      required final DateTime createdAt,
-      final String? userId,
-      final String? userName,
-      final String? userAvatar}) = _$PostModelImpl;
+          {final String? id,
+          @JsonKey(name: 'user_id') final String? userId,
+          required final String text,
+          required final double latitude,
+          required final double longitude,
+          @JsonKey(name: 'image_urls') final List<String> imageUrls,
+          @JsonKey(name: 'created_at') required final DateTime createdAt,
+          @JsonKey(name: 'updated_at') required final DateTime updatedAt}) =
+      _$PostModelImpl;
 
   factory _PostModel.fromJson(Map<String, dynamic> json) =
       _$PostModelImpl.fromJson;
@@ -353,23 +314,23 @@ abstract class _PostModel implements PostModel {
   @override
   String? get id;
   @override
+  @JsonKey(name: 'user_id')
+  String? get userId;
+  @override
   String get text;
   @override
   double get latitude;
   @override
   double get longitude;
   @override
-  List<String> get images;
-  @override
+  @JsonKey(name: 'image_urls')
   List<String> get imageUrls;
   @override
+  @JsonKey(name: 'created_at')
   DateTime get createdAt;
   @override
-  String? get userId;
-  @override
-  String? get userName;
-  @override
-  String? get userAvatar;
+  @JsonKey(name: 'updated_at')
+  DateTime get updatedAt;
 
   /// Create a copy of PostModel
   /// with the given fields replaced by the non-null parameter values.

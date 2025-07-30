@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
 import '../../../view_models/post_view_model.dart';
+import 'map_picker_dialog.dart';
 
-class LocationDisplayComponent extends StatelessWidget {
-  const LocationDisplayComponent({super.key});
+class LocationDisplay extends StatelessWidget {
+  const LocationDisplay({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -76,13 +78,30 @@ class LocationDisplayComponent extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 8),
-                ElevatedButton.icon(
-                  onPressed: viewModel.getCurrentLocation,
-                  icon: const Icon(Icons.location_searching, size: 16),
-                  label: const Text('再取得'),
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                  ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: ElevatedButton.icon(
+                        onPressed: viewModel.getCurrentLocation,
+                        icon: const Icon(Icons.location_searching, size: 16),
+                        label: const Text('再取得'),
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: ElevatedButton.icon(
+                        onPressed: () => _showMapPicker(context, viewModel),
+                        icon: const Icon(Icons.map, size: 16),
+                        label: const Text('地図で選択'),
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ] else ...[
                 const Text('位置情報を取得中...'),
@@ -92,5 +111,18 @@ class LocationDisplayComponent extends StatelessWidget {
         );
       },
     );
+  }
+
+  Future<void> _showMapPicker(BuildContext context, PostViewModel viewModel) async {
+    final position = await showDialog<Position>(
+      context: context,
+      builder: (context) => MapPickerDialog(
+        initialPosition: viewModel.currentPosition,
+      ),
+    );
+
+    if (position != null) {
+      viewModel.setPosition(position);
+    }
   }
 }

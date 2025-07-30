@@ -7,6 +7,7 @@
         "geolocator",
         "googleusercontent",
         "Gorm",
+        "latlong",
         "MVVM",
         "omohide",
         "prefs",

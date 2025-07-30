@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:omohide_map_flutter/repositories/api/sample.dart';
 
 class HomeViewModel extends ChangeNotifier {
+  bool _isDisposed = false;
+
   HomeViewModel() {
     fetchData();
   }
@@ -10,9 +12,17 @@ class HomeViewModel extends ChangeNotifier {
 
   String? get data => _data;
 
+  @override
+  void dispose() {
+    _isDisposed = true;
+    super.dispose();
+  }
+
   Future<void> fetchData() async {
     final repository = SampleApiRepository();
     _data = await repository.fetchData();
-    notifyListeners();
+    if (!_isDisposed) {
+      notifyListeners();
+    }
   }
 }

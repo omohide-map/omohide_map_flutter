@@ -14,7 +14,8 @@ class LocationService {
         throw LocationServiceException('位置情報の権限が拒否されました');
       }
 
-      final isLocationServiceEnabled = await Geolocator.isLocationServiceEnabled();
+      final isLocationServiceEnabled =
+          await Geolocator.isLocationServiceEnabled();
       if (!isLocationServiceEnabled) {
         throw LocationServiceException('位置情報サービスが無効です');
       }
@@ -37,7 +38,7 @@ class LocationService {
 
   Future<bool> _requestLocationPermission() async {
     final status = await Permission.location.status;
-    
+
     if (status.isGranted) {
       return true;
     }
@@ -60,7 +61,8 @@ class LocationService {
     return status.isGranted;
   }
 
-  Future<String> getAddressFromCoordinates(double latitude, double longitude) async {
+  Future<String> getAddressFromCoordinates(
+      double latitude, double longitude) async {
     try {
       final placeMarks = await placemarkFromCoordinates(latitude, longitude);
       if (placeMarks.isNotEmpty) {
@@ -77,7 +79,7 @@ class LocationService {
 class LocationServiceException implements Exception {
   final String message;
   LocationServiceException(this.message);
-  
+
   @override
   String toString() => message;
 }

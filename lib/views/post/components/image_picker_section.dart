@@ -3,8 +3,8 @@ import 'package:provider/provider.dart';
 import '../../../view_models/post_view_model.dart';
 import '../../../services/image_service.dart';
 
-class ImagePickerComponent extends StatelessWidget {
-  const ImagePickerComponent({super.key});
+class ImagePickerSection extends StatelessWidget {
+  const ImagePickerSection({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -51,15 +51,18 @@ class ImagePickerComponent extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.grey.shade100,
           borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: Colors.grey.shade300, style: BorderStyle.solid),
+          border:
+              Border.all(color: Colors.grey.shade300, style: BorderStyle.solid),
         ),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Icons.add_photo_alternate_outlined, 
-                   size: 40, 
-                   color: Colors.grey.shade500),
+              Icon(
+                Icons.add_photo_alternate_outlined,
+                size: 40,
+                color: Colors.grey.shade500,
+              ),
               const SizedBox(height: 8),
               Text(
                 '写真を追加',
@@ -91,7 +94,8 @@ class ImagePickerComponent extends StatelessWidget {
     );
   }
 
-  Widget _buildImageTile(BuildContext context, PostViewModel viewModel, ProcessedImage image, int index) {
+  Widget _buildImageTile(BuildContext context, PostViewModel viewModel,
+      ProcessedImage image, int index) {
     return Stack(
       children: [
         Container(
@@ -151,8 +155,9 @@ class ImagePickerComponent extends StatelessWidget {
   }
 
   Widget _buildActionButtons(BuildContext context, PostViewModel viewModel) {
-    final canAddMore = viewModel.selectedImages.length < ImageService.maxImageCount;
-    
+    final canAddMore =
+        viewModel.selectedImages.length < ImageService.maxImageCount;
+
     return Row(
       children: [
         Expanded(

@@ -80,10 +80,10 @@ class ImageService {
 
     // EXIF情報を削除
     final Uint8List imageBytes = await _removeExifData(file);
-    
+
     // Base64エンコード
     final String base64String = base64Encode(imageBytes);
-    
+
     // MIMEタイプを取得
     final String? mimeType = lookupMimeType(image.path);
 
@@ -113,7 +113,8 @@ class ImageService {
 
   bool isValidImageType(String? mimeType) {
     if (mimeType == null) return false;
-    return ['image/jpeg', 'image/png', 'image/jpg'].contains(mimeType.toLowerCase());
+    return ['image/jpeg', 'image/png', 'image/jpg']
+        .contains(mimeType.toLowerCase());
   }
 
   String formatFileSize(int bytes) {
@@ -137,12 +138,14 @@ class ProcessedImage {
   });
 
   String get dataUrl => 'data:$mimeType;base64,$base64Data';
-  
+
   Uint8List get bytes => base64Decode(base64Data);
 
   String get formattedSize {
     if (fileSizeBytes < 1024) return '${fileSizeBytes}B';
-    if (fileSizeBytes < 1024 * 1024) return '${(fileSizeBytes / 1024).toStringAsFixed(1)}KB';
+    if (fileSizeBytes < 1024 * 1024) {
+      return '${(fileSizeBytes / 1024).toStringAsFixed(1)}KB';
+    }
     return '${(fileSizeBytes / (1024 * 1024)).toStringAsFixed(1)}MB';
   }
 
@@ -155,7 +158,7 @@ class ProcessedImage {
 class ImageServiceException implements Exception {
   final String message;
   ImageServiceException(this.message);
-  
+
   @override
   String toString() => message;
 }

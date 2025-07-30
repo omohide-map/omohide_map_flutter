@@ -1,6 +1,46 @@
 import 'package:dio/dio.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 const apiBaseUrl = 'http://localhost:8080';
+
+Dio createDioInstance() {
+  final dio = Dio(
+    BaseOptions(
+      validateStatus: (status) {
+        return status != null;
+      },
+    ),
+  );
+
+  dio.interceptors.add(
+    InterceptorsWrapper(
+      onRequest: (options, handler) async {
+        // Supabaseから現在のセッションを取得
+        final session = Supabase.instance.client.auth.currentSession;
+        final accessToken = session?.accessToken;
+
+        // アクセストークンが存在する場合は、Authorizationヘッダーに追加
+        if (accessToken != null) {
+          options.headers['Authorization'] = 'Bearer $accessToken';
+        }
+
+        // Content-Typeが設定されていない場合は、デフォルトで設定
+        options.headers['Content-Type'] ??= 'application/json';
+
+        handler.next(options);
+      },
+      onError: (error, handler) {
+        // 401エラーの場合は認証エラーとして処理
+        if (error.response?.statusCode == 401) {
+          // 必要に応じて、ここで再認証処理を実装可能
+        }
+        handler.next(error);
+      },
+    ),
+  );
+
+  return dio;
+}
 
 Future<Response<T>> getApi<T>(
   String path, {
@@ -11,7 +51,7 @@ Future<Response<T>> getApi<T>(
   Duration? timeout,
 }) async {
   final url = '$apiBaseUrl$path';
-  final dio = Dio();
+  final dio = createDioInstance();
 
   try {
     final response = await dio
@@ -40,7 +80,7 @@ Future<Response<T>> postApi<T>(
   Duration? timeout,
 }) async {
   final url = '$apiBaseUrl$path';
-  final dio = Dio();
+  final dio = createDioInstance();
 
   try {
     final response = await dio
@@ -71,7 +111,7 @@ Future<Response<T>> putApi<T>(
   Duration? timeout,
 }) async {
   final url = '$apiBaseUrl$path';
-  final dio = Dio();
+  final dio = createDioInstance();
 
   try {
     final response = await dio
@@ -100,7 +140,7 @@ Future<Response<T>> deleteApi<T>(
   Duration? timeout,
 }) async {
   final url = '$apiBaseUrl$path';
-  final dio = Dio();
+  final dio = createDioInstance();
 
   try {
     final response = await dio

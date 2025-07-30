@@ -1,8 +1,10 @@
 import 'package:go_router/go_router.dart';
 import 'package:omohide_map_flutter/providers/auth_provider.dart';
+import 'package:omohide_map_flutter/view_models/post_view_model.dart';
 import 'package:omohide_map_flutter/views/home/home_page.dart';
 import 'package:omohide_map_flutter/views/login/login_page.dart';
 import 'package:omohide_map_flutter/views/post/post_page.dart';
+import 'package:provider/provider.dart';
 import 'constants/routes.dart';
 
 GoRouter createRouter(AuthProvider authProvider) {
@@ -34,7 +36,12 @@ GoRouter createRouter(AuthProvider authProvider) {
       ),
       GoRoute(
         path: Routes.post,
-        builder: (context, state) => const PostPage(),
+        builder: (context, state) {
+          return ChangeNotifierProvider(
+            create: (_) => PostViewModel(),
+            child: const PostPage(),
+          );
+        },
       ),
     ],
   );

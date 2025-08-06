@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 const apiBaseUrl = 'http://localhost:8080';
 
@@ -15,24 +15,20 @@ Dio createDioInstance() {
   dio.interceptors.add(
     InterceptorsWrapper(
       onRequest: (options, handler) async {
-        // Supabaseから現在のセッションを取得
-        final session = Supabase.instance.client.auth.currentSession;
-        final accessToken = session?.accessToken;
+        final session = FirebaseAuth.instance.currentUser;
+        final accessToken = session?.getIdToken();
 
-        // アクセストークンが存在する場合は、Authorizationヘッダーに追加
         if (accessToken != null) {
           options.headers['Authorization'] = 'Bearer $accessToken';
         }
 
-        // Content-Typeが設定されていない場合は、デフォルトで設定
         options.headers['Content-Type'] ??= 'application/json';
 
         handler.next(options);
       },
       onError: (error, handler) {
-        // 401エラーの場合は認証エラーとして処理
         if (error.response?.statusCode == 401) {
-          // 必要に応じて、ここで再認証処理を実装可能
+          FirebaseAuth.instance.signOut();
         }
         handler.next(error);
       },

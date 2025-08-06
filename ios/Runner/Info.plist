@@ -10,11 +10,19 @@
 				<string>Editor</string>
 				<key>CFBundleURLSchemes</key>
 				<array>
-					<string>com.googleusercontent.apps.948440574311-ktu7j67415eq3asb1cjtdslo5pud8t16</string>
+					<string>com.googleusercontent.apps.462899392087-7d5f5piib7lqrcticji3isstqe58o1q9</string>
 				</array>
 			</dict>
 		</array>
+
+		<key>LSApplicationQueriesSchemes</key>
+		<array>
+			<string>google</string>
+			<string>googlechrome</string>
+			<string>com.googleusercontent.apps.462899392087-7d5f5piib7lqrcticji3isstqe58o1q9</string>
+		</array>
 		<!-- Google Sign-in Section -->
+
 		<key>CFBundleDevelopmentRegion</key>
 		<string>$(DEVELOPMENT_LANGUAGE)</string>
 		<key>CFBundleDisplayName</key>

@@ -21,6 +21,7 @@
   - 投稿ごとに共有リンクを発行して友人とシェア可能（予定）
 
 - **シンプルな UI**
+
   - 地図画面・投稿画面・履歴画面の 3 画面構成
   - 写真と一言で簡単に思い出を残せる
 
@@ -28,34 +29,36 @@
 
 ## 技術スタック
 
-- **フロントエンド**: Flutter (Dart)
+### フロントエンド
+- **Flutter** (Dart)
+  - `google_maps_flutter` - 地図表示
+  - `geolocator` - 現在地取得
+  - `image_picker` - 写真撮影・選択
+  - `firebase_auth` - ユーザー認証
+  - `firebase_core` - Firebase統合
+  - `dio` - HTTP通信
+  - `provider` + `flutter_hooks` - 状態管理
+  - `go_router` - ルーティング
+  - `freezed` + `json_annotation` - データモデル生成
 
-  - `google_maps_flutter` で地図表示
-  - `geolocator` で現在地取得
-  - `image_picker` で写真撮影・選択
-  - `supabase_flutter` で認証・データ保存
+### バックエンド
+- **Go + Echo + Gorm**
+  - RESTful API
+  - 投稿CRUD操作
+  - AI要約生成エンドポイント
 
-- **バックエンド**: Go + Echo + Gorm
+### インフラ・サービス
+- **Firebase**
+  - Authentication - ユーザー認証管理
+  - Firestore - データベース（予定）
+  - Cloud Storage - 画像ストレージ（予定）
 
-  - Supabase Postgres を操作する API
-  - 投稿 CRUD・要約生成 API
+- **AI ポジティブ要約**
+  - ChatGPT API（または将来的にGo内実装）
 
-- **データベース & ストレージ**: Supabase
+---
 
-  - Auth / Storage / Postgres を使用
-
-- **AI ポジティブ要約**: ChatGPT API（または将来的に Go 内実装）
-
-## 技術スタック
-
-- **Flutter**: ^3.6.0
-- **Dart**: ^3.6.0
-- **状態管理**: Provider + flutter_hooks
-- **ルーティング**: go_router
-- **HTTP 通信**: dio
-- **JSON 処理**: freezed + json_annotation
-
-## アーキテクチャ
+## プロジェクト構成
 
 ```
 lib/
@@ -65,29 +68,55 @@ lib/
 ├── repositories/            # データアクセス層
 ├── services/               # 外部API・共通サービス
 ├── models/                 # データモデル
+├── providers/              # 認証・グローバル状態管理
+├── router.dart             # ルーティング設定
 ├── utils/                  # ユーティリティ関数
 └── constants/              # 定数定義
 ```
 
+---
+
 ## セットアップ
 
-### 1. 依存関係のインストール
+### 前提条件
+- Flutter 3.6.0以上
+- Dart 3.6.0以上
+- Firebase プロジェクトの設定
+
+### 1. Firebase設定
+
+Firebase CLIを使用してプロジェクトを設定:
+
+```bash
+# Firebase CLIをインストール（未インストールの場合）
+npm install -g firebase-tools
+
+# FlutterFireをインストール
+dart pub global activate flutterfire_cli
+
+# Firebaseプロジェクトと連携
+flutterfire configure
+```
+
+### 2. 依存関係のインストール
 
 ```bash
 flutter pub get
 ```
 
-### 2. コード生成（モデルクラス）
+### 3. コード生成（モデルクラス）
 
 ```bash
 flutter pub run build_runner build --delete-conflicting-outputs
 ```
 
-### 3. アプリの起動
+### 4. アプリの起動
 
 ```bash
 flutter run
 ```
+
+---
 
 ## 開発コマンド
 
@@ -96,7 +125,7 @@ flutter run
 flutter pub get
 
 # コード生成
-flutter packages pub run build_runner build --delete-conflicting-outputs
+flutter pub run build_runner build --delete-conflicting-outputs
 
 # 静的解析
 flutter analyze
@@ -113,3 +142,23 @@ flutter test test/widget/   # Widgetテストのみ
 flutter build apk           # Android
 flutter build ios          # iOS
 ```
+
+---
+
+## 環境変数
+
+アプリケーションで使用する環境変数は `.env` ファイルで管理します（gitignoreに追加済み）。
+
+```env
+# API設定
+API_BASE_URL=your_api_url
+
+# その他の設定
+GOOGLE_MAPS_API_KEY=your_google_maps_key
+```
+
+---
+
+## ライセンス
+
+このプロジェクトはプライベートリポジトリです。

@@ -4,6 +4,7 @@
         "cjtdslo",
         "cupertino",
         "EXIF",
+        "Firestore",
         "geolocator",
         "googleusercontent",
         "Gorm",
@@ -12,7 +13,6 @@
         "omohide",
         "prefs",
         "pubspec",
-        "supabase",
         "XVCJ"
     ]
 }

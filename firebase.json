@@ -1,0 +1,41 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "omohide-map-app-505a4",
+          "appId": "1:462899392087:android:8a3998487b531ed862fd12",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "ios": {
+        "default": {
+          "projectId": "omohide-map-app-505a4",
+          "appId": "1:462899392087:ios:8688f63b1d66538e62fd12",
+          "uploadDebugSymbols": false,
+          "fileOutput": "ios/Runner/GoogleService-Info.plist"
+        }
+      },
+      "macos": {
+        "default": {
+          "projectId": "omohide-map-app-505a4",
+          "appId": "1:462899392087:ios:8688f63b1d66538e62fd12",
+          "uploadDebugSymbols": false,
+          "fileOutput": "macos/Runner/GoogleService-Info.plist"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "omohide-map-app-505a4",
+          "configurations": {
+            "android": "1:462899392087:android:8a3998487b531ed862fd12",
+            "ios": "1:462899392087:ios:8688f63b1d66538e62fd12",
+            "macos": "1:462899392087:ios:8688f63b1d66538e62fd12",
+            "web": "1:462899392087:web:d5c03ed598ddf55a62fd12",
+            "windows": "1:462899392087:web:bca5781dec99104162fd12"
+          }
+        }
+      }
+    }
+  }
+}

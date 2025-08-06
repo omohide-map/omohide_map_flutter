@@ -1,10 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:omohide_map_flutter/env/env.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AuthProvider extends ChangeNotifier {
-  final _supabase = Supabase.instance.client;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
   User? _user;
   bool _isLoading = false;
 
@@ -17,9 +17,9 @@ class AuthProvider extends ChangeNotifier {
   }
 
   Future<void> _init() async {
-    _user = _supabase.auth.currentUser;
-    _supabase.auth.onAuthStateChange.listen((data) {
-      _user = data.session?.user;
+    _user = _auth.currentUser;
+    _auth.authStateChanges().listen((data) {
+      _user = data;
       notifyListeners();
     });
   }
@@ -29,10 +29,7 @@ class AuthProvider extends ChangeNotifier {
       _isLoading = true;
       notifyListeners();
 
-      final GoogleSignIn googleSignIn = GoogleSignIn(
-        clientId: Env.googleIosClientId,
-      );
-      final googleUser = await googleSignIn.signIn();
+      final googleUser = await _googleSignIn.signIn();
       final googleAuth = await googleUser!.authentication;
       final accessToken = googleAuth.accessToken;
       final idToken = googleAuth.idToken;
@@ -42,10 +39,11 @@ class AuthProvider extends ChangeNotifier {
       if (idToken == null) {
         throw 'No ID Token found.';
       }
-      await _supabase.auth.signInWithIdToken(
-        provider: OAuthProvider.google,
-        idToken: idToken,
-        accessToken: accessToken,
+      await _auth.signInWithCredential(
+        GoogleAuthProvider.credential(
+          accessToken: accessToken,
+          idToken: idToken,
+        ),
       );
     } catch (e) {
       debugPrint('Error signing in with Google: $e');
@@ -61,9 +59,8 @@ class AuthProvider extends ChangeNotifier {
       _isLoading = true;
       notifyListeners();
 
-      await _supabase.auth.signOut();
-      final GoogleSignIn googleSignIn = GoogleSignIn();
-      await googleSignIn.disconnect();
+      await _auth.signOut();
+      await _googleSignIn.signOut();
     } catch (e) {
       debugPrint('Error signing out: $e');
       rethrow;

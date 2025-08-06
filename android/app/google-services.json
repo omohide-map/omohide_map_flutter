@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "462899392087",
+    "project_id": "omohide-map-app-505a4",
+    "storage_bucket": "omohide-map-app-505a4.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:462899392087:android:8a3998487b531ed862fd12",
+        "android_client_info": {
+          "package_name": "com.example.omohide_map_flutter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUzP4C_kDwvedYMqp8OnlXM8CZlMeKPzE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

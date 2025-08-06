@@ -1,10 +1,10 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:omohide_map_flutter/env/env.dart';
+import 'package:omohide_map_flutter/firebase_options.dart';
 import 'package:omohide_map_flutter/providers/auth_provider.dart';
 import 'package:omohide_map_flutter/providers/theme_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'constants/theme.dart';
 import 'router.dart';
@@ -12,9 +12,8 @@ import 'router.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Supabase.initialize(
-    url: Env.supabaseUrl,
-    anonKey: Env.supabaseAnonKey,
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
   );
 
   runApp(const MyApp());

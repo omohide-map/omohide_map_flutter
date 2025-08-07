@@ -12,7 +12,7 @@ class PostRepository {
   Future<PostModel> createPost(CreatePostRequest request) async {
     try {
       final response = await postApi<Map<String, dynamic>>(
-        '/api/posts',
+        '/api/post',
         data: request.toJson(),
         timeout: const Duration(seconds: 30), // 画像アップロードのため長めに設定
       );

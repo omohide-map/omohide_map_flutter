@@ -46,6 +46,10 @@ class _HomePageBody extends StatelessWidget {
         const UserInfoCard(showLogoutButton: false),
         const SizedBox(height: 20),
         if (viewModel.data != null) Text(viewModel.data!),
+        ElevatedButton(
+          onPressed: () => viewModel.getHealthCheck(),
+          child: const Text('health check'),
+        ),
       ],
     );
   }

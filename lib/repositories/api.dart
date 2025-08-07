@@ -16,7 +16,7 @@ Dio createDioInstance() {
     InterceptorsWrapper(
       onRequest: (options, handler) async {
         final session = FirebaseAuth.instance.currentUser;
-        final accessToken = session?.getIdToken();
+        final accessToken = await session?.getIdToken();
 
         if (accessToken != null) {
           options.headers['Authorization'] = 'Bearer $accessToken';

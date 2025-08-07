@@ -8,4 +8,12 @@ class SampleApiRepository {
     }
     return response.data;
   }
+
+  Future<String> getHealthCheck() async {
+    final response = await getApi('/api/health');
+    if (response.statusCode != 200) {
+      throw Exception('Failed to fetch health check');
+    }
+    return response.data;
+  }
 }

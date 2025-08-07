@@ -25,4 +25,12 @@ class HomeViewModel extends ChangeNotifier {
       notifyListeners();
     }
   }
+
+  Future<void> getHealthCheck() async {
+    final repository = SampleApiRepository();
+    _data = await repository.getHealthCheck();
+    if (!_isDisposed) {
+      notifyListeners();
+    }
+  }
 }

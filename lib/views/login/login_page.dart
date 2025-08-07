@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:omohide_map_flutter/providers/auth_provider.dart';
-import 'package:omohide_map_flutter/view_models/login_view_model.dart';
+import 'package:omohide_map_flutter/views/login/login_view_model.dart';
 import 'package:provider/provider.dart';
 
 class LoginPage extends StatelessWidget {

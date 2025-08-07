@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:omohide_map_flutter/repositories/api/post.dart';
-import '../models/post_model.dart';
-import '../services/location_service.dart';
-import '../services/image_service.dart';
+import '../../models/post_model.dart';
+import '../../services/location_service.dart';
+import '../../services/image_service.dart';
 
 class PostViewModel extends ChangeNotifier {
   final LocationService _locationService = LocationService();

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../view_models/post_view_model.dart';
+import '../post_view_model.dart';
 import '../../../services/image_service.dart';
 
 class ImagePickerSection extends StatelessWidget {

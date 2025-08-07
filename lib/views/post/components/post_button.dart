@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:omohide_map_flutter/view_models/post_view_model.dart';
+import 'package:omohide_map_flutter/views/post/post_view_model.dart';
 import 'package:provider/provider.dart';
 
 class PostButton extends StatelessWidget {

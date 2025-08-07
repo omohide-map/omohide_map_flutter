@@ -1,6 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:omohide_map_flutter/providers/auth_provider.dart';
-import 'package:omohide_map_flutter/view_models/post_view_model.dart';
+import 'package:omohide_map_flutter/views/post/post_view_model.dart';
 import 'package:omohide_map_flutter/views/home/home_page.dart';
 import 'package:omohide_map_flutter/views/login/login_page.dart';
 import 'package:omohide_map_flutter/views/post/post_page.dart';

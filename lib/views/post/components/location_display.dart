@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
-import '../../../view_models/post_view_model.dart';
+import '../post_view_model.dart';
 import 'map_picker_dialog.dart';
 
 class LocationDisplay extends StatelessWidget {

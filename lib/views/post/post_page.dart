@@ -3,7 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:omohide_map_flutter/views/post/components/post_button.dart';
 import 'package:omohide_map_flutter/views/post/components/post_text_field.dart';
 import 'package:provider/provider.dart';
-import '../../view_models/post_view_model.dart';
+import 'post_view_model.dart';
 import 'components/image_picker_section.dart';
 import 'components/location_display.dart';
 

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
+import 'package:omohide_map_flutter/constants/routes.dart';
 import 'package:omohide_map_flutter/views/post/components/post_button.dart';
 import 'package:omohide_map_flutter/views/post/components/post_text_field.dart';
 import 'package:provider/provider.dart';
@@ -24,10 +26,6 @@ class PostPage extends HookWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('投稿'),
-        leading: IconButton(
-          icon: const Icon(Icons.close),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
         actions: [
           PostButton(onSubmit: () async {
             try {
@@ -37,7 +35,7 @@ class PostPage extends HookWidget {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(content: Text('投稿が完了しました')),
                 );
-                Navigator.of(context).pop();
+                context.push(Routes.main);
               }
             } catch (e) {
               if (context.mounted) {

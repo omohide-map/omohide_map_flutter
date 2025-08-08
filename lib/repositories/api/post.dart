@@ -29,6 +29,25 @@ class PostRepository {
     }
   }
 
+  Future<List<PostModel>> getMyPosts() async {
+    try {
+      final response = await getApi<List<dynamic>>('/api/posts/my');
+
+      if (response.data == null || response.statusCode != 200) {
+        throw Exception('投稿の取得に失敗しました');
+      }
+
+      final List<dynamic> jsonList = response.data as List<dynamic>;
+      return jsonList
+          .map((json) => PostModel.fromJson(json as Map<String, dynamic>))
+          .toList();
+    } on DioException catch (e) {
+      throw Exception('投稿の取得に失敗しました: ${e.toString()}');
+    } catch (e) {
+      throw Exception('投稿の取得に失敗しました: ${e.toString()}');
+    }
+  }
+
   Future<List<PostModel>> getPosts({
     int? page,
     int? limit,
@@ -37,20 +56,21 @@ class PostRepository {
     double? radius,
   }) async {
     try {
-      final queryParameters = <String, dynamic>{};
-      if (page != null) queryParameters['page'] = page;
-      if (limit != null) queryParameters['limit'] = limit;
-      if (latitude != null) queryParameters['latitude'] = latitude;
-      if (longitude != null) queryParameters['longitude'] = longitude;
-      if (radius != null) queryParameters['radius'] = radius;
+      final params = <String, dynamic>{
+        'page': page,
+        'limit': limit,
+        'latitude': latitude,
+        'longitude': longitude,
+        'radius': radius,
+      };
 
       final response = await getApi<List<dynamic>>(
         '/api/posts',
-        queryParameters: queryParameters.isNotEmpty ? queryParameters : null,
+        queryParameters: params,
       );
 
       if (response.data == null || response.statusCode != 200) {
-        return [];
+        throw Exception('投稿の取得に失敗しました');
       }
 
       return response.data!
@@ -65,7 +85,9 @@ class PostRepository {
 
   Future<PostModel> getPost(String postId) async {
     try {
-      final response = await getApi<Map<String, dynamic>>('/api/posts/$postId');
+      final response = await getApi(
+        '/api/posts/$postId',
+      );
 
       if (response.data == null || response.statusCode != 200) {
         throw Exception('投稿が見つかりません');

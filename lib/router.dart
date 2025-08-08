@@ -3,7 +3,9 @@ import 'package:omohide_map_flutter/providers/auth_provider.dart';
 import 'package:omohide_map_flutter/views/post/post_view_model.dart';
 import 'package:omohide_map_flutter/views/home/home_page.dart';
 import 'package:omohide_map_flutter/views/login/login_page.dart';
+import 'package:omohide_map_flutter/views/main/main_page.dart';
 import 'package:omohide_map_flutter/views/post/post_page.dart';
+import 'package:omohide_map_flutter/views/post_detail/post_detail_page.dart';
 import 'package:provider/provider.dart';
 import 'constants/routes.dart';
 
@@ -20,12 +22,16 @@ GoRouter createRouter(AuthProvider authProvider) {
       }
 
       if (isLoggedIn && isLoggingIn) {
-        return Routes.home;
+        return Routes.main;
       }
 
       return null;
     },
     routes: [
+      GoRoute(
+        path: Routes.main,
+        builder: (context, state) => const MainPage(),
+      ),
       GoRoute(
         path: Routes.home,
         builder: (context, state) => const HomePage(),
@@ -41,6 +47,13 @@ GoRouter createRouter(AuthProvider authProvider) {
             create: (_) => PostViewModel(),
             child: const PostPage(),
           );
+        },
+      ),
+      GoRoute(
+        path: '${Routes.postDetail}/:postId',
+        builder: (context, state) {
+          final postId = state.pathParameters['postId']!;
+          return PostDetailPage(postId: postId);
         },
       ),
     ],

@@ -67,5 +67,8 @@
 		<key>UIApplicationSupportsIndirectInputEvents</key>
 		<true />
 
+		<key>NSLocationWhenInUseUsageDescription</key>
+		<string>地図を表示するために位置情報を使用します。</string>
+
 	</dict>
 </plist>

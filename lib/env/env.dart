@@ -4,6 +4,6 @@ part 'env.g.dart';
 
 @Envied(requireEnvFile: true, obfuscate: true)
 final class Env {
-  @EnviedField(varName: 'API_KEY')
-  static String apiKey = _Env.apiKey;
+  @EnviedField(varName: 'API_BASE_URL')
+  static String apiBaseUrl = _Env.apiBaseUrl;
 }

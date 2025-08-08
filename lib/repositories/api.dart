@@ -1,7 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:omohide_map_flutter/env/env.dart';
 
-const apiBaseUrl = 'http://localhost:8080';
+// const apiBaseUrl = 'http://localhost:8080';
+final apiBaseUrl = Env.apiBaseUrl;
 
 Dio createDioInstance() {
   final dio = Dio(

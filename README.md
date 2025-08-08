@@ -91,3 +91,11 @@ flutter test test/widget/   # Widgetテストのみ
 flutter build apk           # Android
 flutter build ios          # iOS
 ```
+
+# Cloudflare
+
+一時的にローカルサーバーを公開するためのトンネル
+
+```bash
+cloudflared tunnel --url http://localhost:8080
+```

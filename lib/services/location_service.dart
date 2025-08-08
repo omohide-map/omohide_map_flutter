@@ -1,6 +1,6 @@
+import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:geocoding/geocoding.dart';
 
 class LocationService {
   static final LocationService _instance = LocationService._internal();
@@ -37,14 +37,14 @@ class LocationService {
   }
 
   Future<bool> _requestLocationPermission() async {
-    final status = await Permission.location.status;
+    final status = await Permission.locationWhenInUse.status;
 
     if (status.isGranted) {
       return true;
     }
 
     if (status.isDenied) {
-      final result = await Permission.location.request();
+      final result = await Permission.locationWhenInUse.request();
       return result.isGranted;
     }
 
@@ -57,7 +57,7 @@ class LocationService {
   }
 
   Future<bool> checkLocationPermission() async {
-    final status = await Permission.location.status;
+    final status = await Permission.locationWhenInUse.status;
     return status.isGranted;
   }
 

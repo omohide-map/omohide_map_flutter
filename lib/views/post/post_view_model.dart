@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:omohide_map_flutter/repositories/api/post.dart';
+import 'package:permission_handler/permission_handler.dart';
+
 import '../../models/post_model.dart';
-import '../../services/location_service.dart';
 import '../../services/image_service.dart';
+import '../../services/location_service.dart';
 
 class PostViewModel extends ChangeNotifier {
   final LocationService _locationService = LocationService();
@@ -17,12 +19,19 @@ class PostViewModel extends ChangeNotifier {
   Position? _currentPosition;
   String? _currentAddress;
   final List<ProcessedImage> _selectedImages = [];
+  String? _locationErrorMessage;
+  bool _isLocationPermissionGranted = false;
+  bool _isLocationPermissionPermanentlyDenied = false;
 
   bool get isLoading => _isLoading;
   bool get isLocationLoading => _isLocationLoading;
   Position? get currentPosition => _currentPosition;
   String? get currentAddress => _currentAddress;
   List<ProcessedImage> get selectedImages => _selectedImages;
+  String? get locationErrorMessage => _locationErrorMessage;
+  bool get isLocationPermissionGranted => _isLocationPermissionGranted;
+  bool get isLocationPermissionPermanentlyDenied =>
+      _isLocationPermissionPermanentlyDenied;
 
   bool get canPost =>
       textController.text.trim().isNotEmpty &&
@@ -55,6 +64,9 @@ class PostViewModel extends ChangeNotifier {
     _setLocationLoading(true);
 
     try {
+      await _updatePermissionStatus();
+      _locationErrorMessage = null;
+
       final position = await _locationService.getCurrentLocation();
       if (position != null) {
         _currentPosition = position;
@@ -63,6 +75,11 @@ class PostViewModel extends ChangeNotifier {
           position.longitude,
         );
       }
+    } catch (e) {
+      _currentPosition = null;
+      _currentAddress = null;
+      _locationErrorMessage = e.toString();
+      await _updatePermissionStatus();
     } finally {
       _setLocationLoading(false);
     }
@@ -142,6 +159,9 @@ class PostViewModel extends ChangeNotifier {
     _currentAddress = null;
     _isLoading = false;
     _isLocationLoading = false;
+    _locationErrorMessage = null;
+    _isLocationPermissionGranted = false;
+    _isLocationPermissionPermanentlyDenied = false;
     notifyListeners();
   }
 
@@ -164,6 +184,21 @@ class PostViewModel extends ChangeNotifier {
       rethrow;
     } finally {
       _setLoading(false);
+    }
+  }
+
+  Future<void> _updatePermissionStatus() async {
+    final status = await Permission.locationWhenInUse.status;
+    _isLocationPermissionGranted = status.isGranted;
+    _isLocationPermissionPermanentlyDenied = status.isPermanentlyDenied;
+    notifyListeners();
+  }
+
+  Future<void> openLocationSettings() async {
+    await openAppSettings();
+    await _updatePermissionStatus();
+    if (_isLocationPermissionGranted) {
+      await getCurrentLocation();
     }
   }
 }

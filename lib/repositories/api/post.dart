@@ -86,7 +86,7 @@ class PostRepository {
   Future<PostModel> getPost(String postId) async {
     try {
       final response = await getApi(
-        '/api/posts/$postId',
+        '/api/post/$postId',
       );
 
       if (response.data == null || response.statusCode != 200) {

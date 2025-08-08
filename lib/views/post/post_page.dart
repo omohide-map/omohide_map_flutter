@@ -18,7 +18,9 @@ class PostPage extends HookWidget {
 
     useEffect(() {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        context.read<PostViewModel>().getCurrentLocation();
+        if (context.mounted) {
+          context.read<PostViewModel>().getCurrentLocation();
+        }
       });
       return null;
     }, []);

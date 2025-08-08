@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:omohide_map_flutter/views/post/post_view_model.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
-class PostTextField extends StatelessWidget {
-  const PostTextField({super.key});
+class TextSection extends HookWidget {
+  const TextSection({
+    super.key,
+    required this.textController,
+  });
+
+  final TextEditingController textController;
 
   @override
   Widget build(BuildContext context) {
-    final viewModel = context.watch<PostViewModel>();
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -18,10 +20,12 @@ class PostTextField extends StatelessWidget {
             borderRadius: BorderRadius.circular(8),
           ),
           child: TextField(
-            controller: viewModel.textController,
+            controller: textController,
             maxLength: 256,
             maxLines: 5,
-            onChanged: (_) => viewModel.onTextChanged(),
+            onChanged: (_) {
+              textController.text = textController.text;
+            },
             decoration: const InputDecoration(
               hintText: '今何をしていますか？',
               border: InputBorder.none,
@@ -35,13 +39,17 @@ class PostTextField extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              '文字数: ${viewModel.textController.text.length}/256',
+              '文字数: ${textController.text.length}/256',
               style: TextStyle(
                 fontSize: 12,
-                color: viewModel.isTextValid ? Colors.grey : Colors.red,
+                color: textController.text.trim().isNotEmpty &&
+                        textController.text.length <= 256
+                    ? Colors.grey
+                    : Colors.red,
               ),
             ),
-            if (!viewModel.isTextValid)
+            if (!textController.text.trim().isNotEmpty &&
+                textController.text.length <= 256)
               const Text(
                 '1文字以上256文字以下で入力してください',
                 style: TextStyle(
@@ -51,6 +59,7 @@ class PostTextField extends StatelessWidget {
               ),
           ],
         ),
+        const SizedBox(height: 16),
       ],
     );
   }

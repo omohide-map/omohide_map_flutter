@@ -3,6 +3,10 @@ import 'package:omohide_map_flutter/models/post_model.dart';
 import 'package:omohide_map_flutter/repositories/api/post.dart';
 
 class PostsListViewModel extends ChangeNotifier {
+  PostsListViewModel() {
+    fetchPosts();
+  }
+
   final PostRepository _postRepository = PostRepository();
 
   List<PostModel> _posts = [];

@@ -5,6 +5,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:mime/mime.dart';
 import 'dart:ui' as ui;
 
+import 'package:omohide_map_flutter/models/image_model.dart';
+
 class ImageService {
   static final ImageService _instance = ImageService._internal();
   factory ImageService() => _instance;
@@ -121,37 +123,6 @@ class ImageService {
     if (bytes < 1024) return '${bytes}B';
     if (bytes < 1024 * 1024) return '${(bytes / 1024).toStringAsFixed(1)}KB';
     return '${(bytes / (1024 * 1024)).toStringAsFixed(1)}MB';
-  }
-}
-
-class ProcessedImage {
-  final String base64Data;
-  final String mimeType;
-  final String originalFileName;
-  final int fileSizeBytes;
-
-  ProcessedImage({
-    required this.base64Data,
-    required this.mimeType,
-    required this.originalFileName,
-    required this.fileSizeBytes,
-  });
-
-  String get dataUrl => 'data:$mimeType;base64,$base64Data';
-
-  Uint8List get bytes => base64Decode(base64Data);
-
-  String get formattedSize {
-    if (fileSizeBytes < 1024) return '${fileSizeBytes}B';
-    if (fileSizeBytes < 1024 * 1024) {
-      return '${(fileSizeBytes / 1024).toStringAsFixed(1)}KB';
-    }
-    return '${(fileSizeBytes / (1024 * 1024)).toStringAsFixed(1)}MB';
-  }
-
-  @override
-  String toString() {
-    return 'ProcessedImage(fileName: $originalFileName, mimeType: $mimeType, size: $formattedSize)';
   }
 }
 

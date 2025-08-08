@@ -1,5 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:omohide_map_flutter/providers/auth_provider.dart';
+import 'package:omohide_map_flutter/views/home/home_view_model.dart';
+import 'package:omohide_map_flutter/views/login/login_view_model.dart';
 import 'package:omohide_map_flutter/views/post/post_view_model.dart';
 import 'package:omohide_map_flutter/views/home/home_page.dart';
 import 'package:omohide_map_flutter/views/login/login_page.dart';
@@ -34,27 +36,30 @@ GoRouter createRouter(AuthProvider authProvider) {
       ),
       GoRoute(
         path: Routes.home,
-        builder: (context, state) => const HomePage(),
+        builder: (context, state) => ChangeNotifierProvider(
+          create: (_) => HomeViewModel(),
+          child: const HomePage(),
+        ),
       ),
       GoRoute(
         path: Routes.login,
-        builder: (context, state) => const LoginPage(),
+        builder: (context, state) => ChangeNotifierProvider(
+          create: (_) => LoginViewModel(),
+          child: const LoginPage(),
+        ),
       ),
       GoRoute(
         path: Routes.post,
-        builder: (context, state) {
-          return ChangeNotifierProvider(
-            create: (_) => PostViewModel(),
-            child: const PostPage(),
-          );
-        },
+        builder: (context, state) => ChangeNotifierProvider(
+          create: (_) => PostViewModel(),
+          child: const PostPage(),
+        ),
       ),
       GoRoute(
         path: '${Routes.postDetail}/:postId',
-        builder: (context, state) {
-          final postId = state.pathParameters['postId']!;
-          return PostDetailPage(postId: postId);
-        },
+        builder: (context, state) => PostDetailPage(
+          postId: state.pathParameters['postId']!,
+        ),
       ),
     ],
   );

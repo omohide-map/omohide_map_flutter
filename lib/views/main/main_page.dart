@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:omohide_map_flutter/views/home/home_page.dart';
+import 'package:omohide_map_flutter/views/home/home_view_model.dart';
 import 'package:omohide_map_flutter/views/post/post_page.dart';
 import 'package:omohide_map_flutter/views/post/post_view_model.dart';
 import 'package:omohide_map_flutter/views/posts_list/posts_list_page.dart';
+import 'package:omohide_map_flutter/views/posts_list/posts_list_view_model.dart';
 import 'package:omohide_map_flutter/views/settings/settings_page.dart';
 import 'package:provider/provider.dart';
 
@@ -20,12 +22,18 @@ class MainPage extends HookWidget {
       body: IndexedStack(
         index: selectedIndex.value,
         children: [
-          const HomePage(),
+          ChangeNotifierProvider(
+            create: (_) => HomeViewModel(),
+            child: const HomePage(),
+          ),
           ChangeNotifierProvider(
             create: (_) => PostViewModel(),
             child: const PostPage(),
           ),
-          const PostsListPage(),
+          ChangeNotifierProvider(
+            create: (_) => PostsListViewModel(),
+            child: const PostsListPage(),
+          ),
           const SettingsPage(),
         ],
       ),

@@ -9,15 +9,12 @@ class PostsListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => PostsListViewModel()..fetchPosts(),
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('投稿一覧'),
-          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        ),
-        body: const _PostsListBody(),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('投稿一覧'),
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       ),
+      body: const _PostsListBody(),
     );
   }
 }
@@ -111,7 +108,9 @@ class _PostCard extends StatelessWidget {
                     errorBuilder: (context, error, stackTrace) {
                       return Container(
                         height: 200,
-                        color: Theme.of(context).colorScheme.surfaceContainerHighest,
+                        color: Theme.of(context)
+                            .colorScheme
+                            .surfaceContainerHighest,
                         child: const Icon(Icons.error),
                       );
                     },
@@ -130,8 +129,8 @@ class _PostCard extends StatelessWidget {
                   Text(
                     '${post.latitude.toStringAsFixed(6)}, ${post.longitude.toStringAsFixed(6)}',
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: Theme.of(context).colorScheme.secondary,
-                    ),
+                          color: Theme.of(context).colorScheme.secondary,
+                        ),
                   ),
                 ],
               ),

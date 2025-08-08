@@ -1,37 +1,40 @@
 import 'package:flutter/material.dart';
-import 'package:omohide_map_flutter/views/post/post_view_model.dart';
-import 'package:provider/provider.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:omohide_map_flutter/models/image_model.dart';
 
 class PostButton extends StatelessWidget {
   const PostButton({
     super.key,
+    required this.text,
+    required this.address,
+    required this.position,
+    required this.images,
     required this.onSubmit,
+    required this.canPost,
   });
 
+  final String text;
+  final String? address;
+  final Position? position;
+  final List<ProcessedImage> images;
   final VoidCallback onSubmit;
+  final bool canPost;
 
   @override
   Widget build(BuildContext context) {
-    final viewModel = context.watch<PostViewModel>();
     return TextButton(
-      onPressed: viewModel.canPost
-          ? () => _showPostConfirmation(context, viewModel)
-          : null,
+      onPressed: canPost ? () => _showPostConfirmation(context) : null,
       child: Text(
         '投稿',
         style: TextStyle(
-          color:
-              viewModel.canPost ? Theme.of(context).primaryColor : Colors.grey,
+          color: canPost ? Theme.of(context).primaryColor : Colors.grey,
           fontWeight: FontWeight.bold,
         ),
       ),
     );
   }
 
-  Future<void> _showPostConfirmation(
-    BuildContext context,
-    PostViewModel viewModel,
-  ) async {
+  Future<void> _showPostConfirmation(BuildContext context) async {
     final shouldPost = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
@@ -42,11 +45,9 @@ class PostButton extends StatelessWidget {
           children: [
             const Text('以下の内容で投稿しますか？'),
             const SizedBox(height: 16),
-            Text('テキスト: ${viewModel.textController.text.trim()}'),
-            if (viewModel.currentAddress != null)
-              Text('場所: ${viewModel.currentAddress}'),
-            if (viewModel.selectedImages.isNotEmpty)
-              Text('画像: ${viewModel.selectedImages.length}枚'),
+            Text('テキスト: $text'),
+            Text('場所: $address'),
+            if (images.isNotEmpty) Text('画像: ${images.length}枚'),
           ],
         ),
         actions: [

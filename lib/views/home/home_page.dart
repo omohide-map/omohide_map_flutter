@@ -9,42 +9,30 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => HomeViewModel(),
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('おもひでまっぷ'),
-          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-          actions: [
-            const LogoutIconButton(),
-          ],
-        ),
-        body: Center(
-          child: _HomePageBody(),
-        ),
-      ),
-    );
-  }
-}
-
-class _HomePageBody extends StatelessWidget {
-  const _HomePageBody();
-
-  @override
-  Widget build(BuildContext context) {
     final viewModel = context.watch<HomeViewModel>();
 
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const UserInfoCard(showLogoutButton: false),
-        const SizedBox(height: 20),
-        if (viewModel.data != null) Text(viewModel.data!),
-        ElevatedButton(
-          onPressed: () => viewModel.getHealthCheck(),
-          child: const Text('health check'),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('おもひでまっぷ'),
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        actions: [
+          const LogoutIconButton(),
+        ],
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const UserInfoCard(showLogoutButton: false),
+            const SizedBox(height: 20),
+            if (viewModel.data != null) Text(viewModel.data!),
+            ElevatedButton(
+              onPressed: () => viewModel.getHealthCheck(),
+              child: const Text('health check'),
+            ),
+          ],
         ),
-      ],
+      ),
     );
   }
 }
